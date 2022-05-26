@@ -22,7 +22,7 @@ public class CameraControl : MonoBehaviour {
 
     private Vector3 _pos;
     void Update() {
-        if (!isMoving || PauseControl.isPaused) return;
+        if (!isMoving || GameManager.IsPaused) return;
         moveTime %= Time.fixedDeltaTime;
         moveTime += Time.deltaTime * 3;
 

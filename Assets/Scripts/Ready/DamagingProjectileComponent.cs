@@ -17,13 +17,11 @@ public class DamagingProjectileComponent : MonoBehaviour {
 		Health health = target.GetComponent<Health>();
 		if (health == null) return;
 
-		bool isCrit = false;
 		if (Random.value < critChance) {
 			damage *= (1 + critMultipler);
-			isCrit = true;
 		}
 
-		health.GetDamage(damage, transform.position + center, isCrit, knockbackInflictedMultipler);
+		health.GetDamage(damage, transform.position + center, knockbackInflictedMultipler);
 	}
 	public void damageTarget(GameObject target, float damage) {
 		damageTarget(target, damage, Vector2.zero);

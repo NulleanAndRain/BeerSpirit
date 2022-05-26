@@ -15,11 +15,11 @@ public class MagnetableItem : MonoBehaviour {
 		rb = GetComponent<Rigidbody2D>();
 		item = GetComponent<CollectableItem>();
 
-		void disable(Collider2D _) {
+		void Disable(Collider _) {
 			enabled = false;
 		}
 
-		item.onCollect += disable;
+		item.OnCollect += Disable;
 	}
 
 	public void dragTo(ItemMagnet magnet) {

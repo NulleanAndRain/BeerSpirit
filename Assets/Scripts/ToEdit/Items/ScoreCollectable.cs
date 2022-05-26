@@ -5,16 +5,20 @@ using UnityEngine;
 [RequireComponent(typeof(CollectableItem))]
 public class ScoreCollectable : MonoBehaviour {
 
-    public float Score;
+    [SerializeField]
+    private float _score;
+    private CollectableItem _collectable;
 
     void Start() {
-        CollectableItem collectable = GetComponent<CollectableItem>();
-        void collect(Collider2D other) {
-            var collector = other.GetComponent<ScoreCollector>();
-            if (collector == null) return;
-            collector.CollectScore(Score);
-            collectable.collect();
-        }
-        collectable.onCollect += collect;
+        _collectable = GetComponent<CollectableItem>();
+        _collectable.OnCollect += Collect;
+    }
+
+    void Collect(Collider other)
+    {
+        var collector = other.GetComponent<ScoreCollector>();
+        if (collector == null) return;
+        collector.Score += _score;
+        _collectable.Collect();
     }
 }

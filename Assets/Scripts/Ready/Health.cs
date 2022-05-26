@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody))]
 public class Health : MonoBehaviour
 {
     [Header("Health")]
@@ -37,7 +37,7 @@ public class Health : MonoBehaviour
 
     [Header("Knockback")]
     public float knockbackResist;
-    private Rigidbody2D rb;
+    private Rigidbody rb;
     public Vector3 center;
 
     public event UnityAction OnDowned = delegate { };
@@ -48,7 +48,7 @@ public class Health : MonoBehaviour
     void Start() {
         _currHealth = _maxHealth;
 
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody>();
 
         if (_canRegen) StartCoroutine(Regen());
     }
@@ -89,7 +89,7 @@ public class Health : MonoBehaviour
         kbForce *= (1 - knockbackResist) * rb.mass;
         if (kbForce < 0) kbForce = 0;
         _kbDir *= kbForce;
-        rb.AddForce(_kbDir, ForceMode2D.Impulse);
+        rb.AddForce(_kbDir, ForceMode.Impulse);
 
         if (!_isImmortal) {
             _currHealth -= amount;
